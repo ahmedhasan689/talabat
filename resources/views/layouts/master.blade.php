@@ -11,7 +11,7 @@ Purchase: https://1.envato.market/EA4JP
 Renew Support: https://1.envato.market/EA4JP
 License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
 -->
-<html lang="en">
+<html lang="en" @if( app()->getLocale() == 'ar' ) direction="rtl" style="direction: rtl;" @endif>
 <!--begin::Head-->
 <x-head />
 <!--end::Head-->
@@ -134,39 +134,46 @@ License: You must have a valid license purchased only from themeforest(the above
                             <!--begin::Toggle-->
                             <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
                                 <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
-                                    <img class="h-20px w-20px rounded-sm"
-                                         src="assets/media/svg/flags/226-united-states.svg" alt=""/>
+                                    @if( app()->getLocale() == 'en')
+                                        <img class="h-20px w-20px rounded-sm" src="assets/media/svg/flags/226-united-states.svg" alt=""/>
+                                    @else
+                                        <img class="h-20px w-20px rounded-sm" src="{{ asset('assets/media/svg/flags/133-saudi-arabia.svg') }}" alt=""/>
+                                    @endif
                                 </div>
                             </div>
                             <!--end::Toggle-->
                             <!--begin::Dropdown-->
-                            <div
-                                    class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
+                            <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
                                 <!--begin::Nav-->
-                                <ul class="navi navi-hover py-4">
-                                    <!--begin::Item-->
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-												<span class="symbol symbol-20 mr-3">
-													<img src="{{ asset('assets/media/svg/flags/226-united-states.svg') }}" alt=""/>
-												</span>
-                                            <span class="navi-text">English</span>
-                                        </a>
-                                    </li>
-                                    <!--end::Item-->
-                                    <!--begin::Item-->
-                                    <li class="navi-item active">
-                                        <a href="#" class="navi-link">
-												<span class="symbol symbol-20 mr-3">
-													<img src="{{ asset('assets/media/svg/flags/133-saudi-arabia.svg') }}" alt=""/>
-												</span>
-                                            <span class="navi-text">
-                                                العربية
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <!--end::Item-->
-                                </ul>
+
+
+
+                                    <form action="{{ URL::current() }}" method="GET">
+                                        <select name="locale" class="navi navi-hover py-4" onchange="this.form.submit()" style="width: 175px; border: none">
+                                            <!--begin::Arabic-->
+                                            <option class="navi-item" value="en" @if( app()->getLocale() == 'en' ) selected @endif>
+                                                <label class="symbol symbol-20 mr-3">
+                                                    <img src="{{ asset('assets/media/svg/flags/226-united-states.svg') }}" alt=""/>
+                                                </label>
+                                                <span class="navi-text">
+                                                    English
+                                                </span>
+                                            </option>
+                                            <!--end::Arabic-->
+
+                                            <!--begin::Arabic-->
+                                            <option class="navi-item" value="ar"  @if( app()->getLocale() == 'ar' ) selected @endif>
+                                                <label class="symbol symbol-20 mr-3">
+                                                    <img src="{{ asset('assets/media/svg/flags/133-saudi-arabia.svg') }}" alt=""/>
+                                                </label>
+                                                <span class="navi-text">
+                                                    العربية
+                                                </span>
+                                            </option>
+                                            <!--end::Arabic-->
+                                        </select>
+                                    </form>
+
                                 <!--end::Nav-->
                             </div>
                             <!--end::Dropdown-->
@@ -192,10 +199,48 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!--end::Topbar-->
                 </div>
                 <!--end::Container-->
+
+                <div class="subheader subheader-solid" id="kt_subheader">
+                    <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                        <!--begin::Info-->
+                        <div class="d-flex align-items-center flex-wrap mr-1">
+                            <!--begin::Page Heading-->
+                            <div class="d-flex align-items-baseline flex-wrap mr-5">
+                                <!--begin::Page Title-->
+                                <h5 class="text-dark font-weight-bold my-1 mr-5">
+                                    @yield('subheader_title')
+                                </h5>
+                                <!--end::Page Title-->
+                                <!--begin::Breadcrumb-->
+                                <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                                    <li class="breadcrumb-item">
+                                        <a href="" class="text-muted">
+                                            @yield('subheader_subtitle')
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a href="" class="text-muted">
+                                            @yield('subheader_subtitle_two')
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--end::Breadcrumb-->
+                            </div>
+                            <!--end::Page Heading-->
+                        </div>
+                        <!--end::Info-->
+                    </div>
+                </div>
             </div>
             <!--end::Header-->
-            <!--begin::Content-->
-            <div class="content d-flex flex-column flex-column-fluid" id="kt_content" style="padding: 0">
+
+{{--            <div class="content d-flex flex-column flex-column-fluid">--}}
+{{--                <!--begin::Subheader-->--}}
+{{--                --}}
+{{--                <!--end::Subheader-->--}}
+{{--            </div>--}}
+{{--            <!--begin::Content-->--}}
+            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
                 <!--begin::Entry-->
                 <div class="d-flex flex-column-fluid">

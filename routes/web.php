@@ -15,14 +15,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+//Route::get('/user', [HomeController::class, 'index'])->name('home');
 
-//Route::get('/', function () {
-//    return view('home');
-//});
+Route::get('/user', function () {
+    return view('users.index');
+})->name('user.index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+
+Route::get('/orders', function () {
+    return view('orders.index');
+})->name('order.index');
+
+Route::get('/offers', function () {
+    return view('offers.index');
+})->name('offer.index');
+
+Route::get('/', function () {
+    return view('home');
+})->name('home.index');
+
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
